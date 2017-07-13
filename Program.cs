@@ -126,20 +126,45 @@ public class Program
     public static void Main() {
 
         // Build a collection of all vehicles that fly
-
+        List <string> Flyers = new List <string>();
+        Flyers.Add("Helicopter");
+        Flyers.Add("Airplane");
+        Flyers.Add("Hot Air Balloon");
+        Flyers.Add("Blimp");
+        
+        Console.WriteLine("\nIn The Air\n");
         // With a single `foreach`, have each vehicle Fly()
-
-
+        foreach (string fly in Flyers)
+        {
+            Console.WriteLine(fly);
+        }
 
         // Build a collection of all vehicles that operate on roads
+        List<string> OnRoads = new List<string>();
+        OnRoads.Add("Car");
+        OnRoads.Add("Truck");
+        OnRoads.Add("Bicycle");
+        OnRoads.Add("GoKart");
 
+        Console.WriteLine("\nOn the Road\n");
         // With a single `foreach`, have each road vehicle Drive()
+        foreach(string road in OnRoads)
+        {
+            Console.WriteLine(road);
+        }
 
-
-
+        Console.WriteLine("\nOn the Water\n");
         // Build a collection of all vehicles that operate on water
-        
+        List<string> OnWater = new List <string>();
+        OnWater.Add("Motor Boat");
+        OnWater.Add("Sail Boat");
+        OnWater.Add("Barge");
+        OnWater.Add("Submarine");
         // With a single `foreach`, have each water vehicle Drive()
+        foreach(string water in OnWater)
+        {
+            Console.WriteLine(water);
+        }
     }
 
 }
