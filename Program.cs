@@ -5,32 +5,44 @@ using System.Collections.Generic;
 
 public interface IVehicle
 {
-    int Wheels { get; set; }
     int Doors { get; set; }
     int PassengerCapacity { get; set; }
-    bool Winged { get; set; }
     string TransmissionType { get; set; }
     double EngineVolume { get; set; }
-    double MaxWaterSpeed { get; set; }
-    double MaxLandSpeed { get; set; }
-    double MaxAirSpeed { get; set; }
     void Start();
     void Stop();
     void Drive();
-    void Fly();
+
 }
 
-public class JetSki : IVehicle
+public interface IFlyer
 {
-    public int Wheels { get; set; }
-    public int Doors { get; set; }
-    public int PassengerCapacity { get; set; }
-    public bool Winged { get; set; }
-    public string TransmissionType { get; set; }
-    public double EngineVolume { get; set; }
-    public double MaxWaterSpeed { get; set; }
-    public double MaxLandSpeed { get; set; }
-    public double MaxAirSpeed { get; set; }
+    bool Winged { get; set; }
+    double MaxAirSpeed { get; set; }
+    double MaxLandSpeed { get; set; }
+    int Wheels { get; set; }
+    void Fly();
+
+}
+
+public interface IDriver
+{
+    int Wheels { get; set; }
+    double MaxWaterSpeed { get; set; }
+}
+
+public interface IWater
+{
+    double MaxWaterSpeed { get; set; }
+}
+
+public class JetSki : IVehicle, IWater
+{
+    public int Doors { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int PassengerCapacity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxWaterSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public void Drive()
     {
@@ -53,7 +65,31 @@ public class JetSki : IVehicle
     }
 }
 
-public class Motorcycle : IVehicle
+public class Oceanliner : IVehicle, IWater
+{
+    public int Doors { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int PassengerCapacity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxWaterSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public void Drive()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Stop()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class Motorcycle : IVehicle, IDriver
 {
     public int Wheels { get; set; } = 2;
     public int Doors { get; set; } = 0;
@@ -86,7 +122,32 @@ public class Motorcycle : IVehicle
     }
 }
 
-public class Cessna : IVehicle
+public class GoKart : IVehicle, IDriver
+{
+    public int Wheels { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxWaterSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Doors { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int PassengerCapacity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    void IVehicle.Drive()
+    {
+        throw new NotImplementedException();
+    }
+
+    void IVehicle.Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    void IVehicle.Stop()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class Cessna : IVehicle, IFlyer
 {
   public int Wheels { get; set; } = 3;
   public int Doors { get; set; } = 3;
@@ -119,6 +180,38 @@ public class Cessna : IVehicle
   }
 }
 
+public class FighterJet : IVehicle, IFlyer
+{
+    public int Doors { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int PassengerCapacity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool Winged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxAirSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxLandSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Wheels { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public void Drive()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Start()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Stop()
+    {
+        throw new NotImplementedException();
+    }
+}
+
 
 public class Program
 {
@@ -126,45 +219,20 @@ public class Program
     public static void Main() {
 
         // Build a collection of all vehicles that fly
-        List <string> Flyers = new List <string>();
-        Flyers.Add("Helicopter");
-        Flyers.Add("Airplane");
-        Flyers.Add("Hot Air Balloon");
-        Flyers.Add("Blimp");
-        
-        Console.WriteLine("\nIn The Air\n");
+ 
         // With a single `foreach`, have each vehicle Fly()
-        foreach (string fly in Flyers)
-        {
-            Console.WriteLine(fly);
-        }
+
+
 
         // Build a collection of all vehicles that operate on roads
-        List<string> OnRoads = new List<string>();
-        OnRoads.Add("Car");
-        OnRoads.Add("Truck");
-        OnRoads.Add("Bicycle");
-        OnRoads.Add("GoKart");
 
-        Console.WriteLine("\nOn the Road\n");
         // With a single `foreach`, have each road vehicle Drive()
-        foreach(string road in OnRoads)
-        {
-            Console.WriteLine(road);
-        }
 
-        Console.WriteLine("\nOn the Water\n");
+
+
         // Build a collection of all vehicles that operate on water
-        List<string> OnWater = new List <string>();
-        OnWater.Add("Motor Boat");
-        OnWater.Add("Sail Boat");
-        OnWater.Add("Barge");
-        OnWater.Add("Submarine");
+        
         // With a single `foreach`, have each water vehicle Drive()
-        foreach(string water in OnWater)
-        {
-            Console.WriteLine(water);
-        }
     }
 
 }
