@@ -1,3 +1,5 @@
 # C# Interfaces and SOLID
 
-Followed instructions. Interfaces. Making it work.
+Followed instructions. Interfaces. All that stuff. 
+
+It works now... I think?

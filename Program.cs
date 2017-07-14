@@ -11,7 +11,6 @@ public interface IVehicle
     double EngineVolume { get; set; }
     void Start();
     void Stop();
-    void Drive();
 
 }
 
@@ -29,11 +28,13 @@ public interface IDriver
 {
     int Wheels { get; set; }
     double MaxWaterSpeed { get; set; }
+    void Drive();
 }
 
 public interface IWater
 {
     double MaxWaterSpeed { get; set; }
+    void Drive();
 }
 
 public class JetSki : IVehicle, IWater
@@ -75,7 +76,7 @@ public class Oceanliner : IVehicle, IWater
 
     public void Drive()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("An Oceanliner is nothing more than a floating hotel...");
     }
 
     public void Start()
@@ -91,15 +92,12 @@ public class Oceanliner : IVehicle, IWater
 
 public class Motorcycle : IVehicle, IDriver
 {
-    public int Wheels { get; set; } = 2;
-    public int Doors { get; set; } = 0;
-    public int PassengerCapacity { get; set; }
-    public bool Winged { get; set; } = false;
-    public string TransmissionType { get; set; } = "Manual";
-    public double EngineVolume { get; set; } = 1.3;
-    public double MaxWaterSpeed { get; set; }
-    public double MaxLandSpeed { get; set; } = 160.4;
-    public double MaxAirSpeed { get; set; }
+    public int Doors { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int PassengerCapacity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public int Wheels { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public double MaxWaterSpeed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public void Drive()
     {
@@ -131,17 +129,17 @@ public class GoKart : IVehicle, IDriver
     public string TransmissionType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public double EngineVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-    void IVehicle.Drive()
+    public void Drive()
+    {
+        Console.WriteLine("The GoKart zips around the track");
+    }
+
+    public void Start()
     {
         throw new NotImplementedException();
     }
 
-    void IVehicle.Start()
-    {
-        throw new NotImplementedException();
-    }
-
-    void IVehicle.Stop()
+    public void Stop()
     {
         throw new NotImplementedException();
     }
@@ -198,7 +196,7 @@ public class FighterJet : IVehicle, IFlyer
 
     public void Fly()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("The Fighter Jet broke the sound barrier");
     }
 
     public void Start()
@@ -219,20 +217,45 @@ public class Program
     public static void Main() {
 
         // Build a collection of all vehicles that fly
- 
+            Cessna aCessna = new Cessna();
+            FighterJet aFighterJet = new FighterJet();
+
+            List <IFlyer> Flyers = new List <IFlyer>();
+            Flyers.Add(aCessna);
+            Flyers.Add(aFighterJet);
         // With a single `foreach`, have each vehicle Fly()
-
-
+            foreach(var air in Flyers)
+            {
+                air.Fly();
+            }
 
         // Build a collection of all vehicles that operate on roads
+            GoKart aGoKart = new GoKart();
+            Motorcycle aMotorcycle = new Motorcycle();
+
+            List <IDriver> Drivers = new List <IDriver>();
+            Drivers.Add(aGoKart);
+            Drivers.Add(aMotorcycle);
 
         // With a single `foreach`, have each road vehicle Drive()
-
-
+            foreach(var road in Drivers)
+            {
+                road.Drive();
+            }
 
         // Build a collection of all vehicles that operate on water
+            Oceanliner anOceanliner = new Oceanliner();
+            JetSki aJetSki = new JetSki();
+
+            List <IWater> Boats = new List <IWater>();
+            Boats.Add(anOceanliner);
+            Boats.Add(aJetSki);
         
         // With a single `foreach`, have each water vehicle Drive()
+            foreach(var water in Boats)
+            {
+                water.Drive();
+            }
     }
 
 }
